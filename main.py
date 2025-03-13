@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# ✅ CORS（クロスオリジン）対応：どこからでもアクセスOKにしておく
+# ✅ CORS設定（外部アクセスを許可）
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -12,12 +12,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ✅ エンドポイント名を「/uppercase」に変更
+# ✅ /uppercase エンドポイント
 @app.get("/uppercase")
 def uppercase(text: str):
     return {"result": text.upper()}
 
-# ✅ uvicornで起動するためのコード（Render上でも自動実行される）
+# ✅ サーバー起動（ローカル用）
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=10000)
